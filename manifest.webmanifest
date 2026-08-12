@@ -1,0 +1,10 @@
+{
+  "name": "Sommerfest Kasse",
+  "short_name": "Kasse",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a3a2f",
+  "theme_color": "#1a3a2f",
+  "lang": "de",
+  "icons": []
+}
