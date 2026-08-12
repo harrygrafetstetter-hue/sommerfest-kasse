@@ -24,16 +24,12 @@ const ARTICLES = [
   { id: "crepes-nutella", name: "Crepes mit Nutella", group: "Speisen", price: 4.5, pfand: false },
 ];
 
-const GROUPS = ["Biere", "Soft Drinks", "Schorle / Cocktails", "Speisen"];
-
 const state = {
-  activeGroup: GROUPS[0],
   cart: [],
   sales: [],
 };
 
 const els = {
-  groups: document.getElementById("groups"),
   products: document.getElementById("products"),
   cartList: document.getElementById("cart-list"),
   cartEmpty: document.getElementById("cart-empty"),
@@ -104,20 +100,9 @@ function updateClock() {
   }).format(new Date());
 }
 
-function renderGroups() {
-  els.groups.innerHTML = GROUPS.map(
-    (group) => `
-      <button type="button" class="group-btn ${group === state.activeGroup ? "is-active" : ""}" data-group="${group}">
-        ${group}
-      </button>`
-  ).join("");
-}
-
 function renderProducts() {
-  const items = ARTICLES.filter((a) => a.group === state.activeGroup);
-  els.products.innerHTML = items
-    .map(
-      (article) => `
+  els.products.innerHTML = ARTICLES.map(
+    (article) => `
       <button type="button" class="product" data-id="${article.id}" data-group="${article.group}">
         <span class="product-name">${article.name}</span>
         <span class="product-meta">
@@ -125,8 +110,7 @@ function renderProducts() {
           ${article.pfand ? `<span class="product-pfand">+ ${money(PFAND)} Pfand</span>` : ""}
         </span>
       </button>`
-    )
-    .join("");
+  ).join("");
 }
 
 function findCartLine(predicate) {
@@ -547,14 +531,6 @@ function bindEvents() {
     tab.addEventListener("click", () => switchView(tab.dataset.view));
   });
 
-  els.groups.addEventListener("click", (event) => {
-    const btn = event.target.closest(".group-btn");
-    if (!btn) return;
-    state.activeGroup = btn.dataset.group;
-    renderGroups();
-    renderProducts();
-  });
-
   els.products.addEventListener("click", (event) => {
     const btn = event.target.closest(".product");
     if (!btn) return;
@@ -605,7 +581,6 @@ function bindEvents() {
 
 function init() {
   load();
-  renderGroups();
   renderProducts();
   renderCart();
   renderAuswertung();
