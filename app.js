@@ -24,6 +24,13 @@ const ARTICLES = [
   { id: "crepes-nutella", name: "Crepes mit Nutella", group: "Speisen", price: 4.5, pfand: false },
 ];
 
+const GROUP_ORDER = [
+  { id: "Biere", label: "Biere" },
+  { id: "Soft Drinks", label: "Softgetränke" },
+  { id: "Schorle / Cocktails", label: "Schorle & Cocktails" },
+  { id: "Speisen", label: "Speisen" },
+];
+
 const state = {
   cart: [],
   sales: [],
@@ -101,16 +108,27 @@ function updateClock() {
 }
 
 function renderProducts() {
-  els.products.innerHTML = ARTICLES.map(
-    (article) => `
-      <button type="button" class="product" data-id="${article.id}" data-group="${article.group}">
-        <span class="product-name">${article.name}</span>
-        <span class="product-meta">
-          <span class="product-price">${money(article.price)}</span>
-          ${article.pfand ? `<span class="product-pfand">+ ${money(PFAND)} Pfand</span>` : ""}
-        </span>
-      </button>`
-  ).join("");
+  els.products.innerHTML = GROUP_ORDER.map(({ id, label }) => {
+    const items = ARTICLES.filter((article) => article.group === id);
+    const buttons = items
+      .map(
+        (article) => `
+        <button type="button" class="product" data-id="${article.id}" data-group="${article.group}">
+          <span class="product-name">${article.name}</span>
+          <span class="product-meta">
+            <span class="product-price">${money(article.price)}</span>
+            ${article.pfand ? `<span class="product-pfand">+ ${money(PFAND)} Pfand</span>` : ""}
+          </span>
+        </button>`
+      )
+      .join("");
+
+    return `
+      <section class="product-group" data-group="${id}">
+        <h2 class="product-group-title">${label}</h2>
+        <div class="product-group-grid">${buttons}</div>
+      </section>`;
+  }).join("");
 }
 
 function findCartLine(predicate) {

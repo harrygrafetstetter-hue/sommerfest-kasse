@@ -159,12 +159,40 @@ button {
 }
 
 .products {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   align-content: start;
   overflow: auto;
   padding-right: 2px;
+}
+
+.product-group {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 20px;
+  background: rgba(20, 36, 29, 0.04);
+  border: 1px solid var(--line);
+}
+
+.product-group-title {
+  margin: 0;
+  padding: 0 4px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.product-group[data-group="Biere"] .product-group-title { color: var(--beer); }
+.product-group[data-group="Soft Drinks"] .product-group-title { color: var(--soft); }
+.product-group[data-group="Schorle / Cocktails"] .product-group-title { color: var(--schorle); }
+.product-group[data-group="Speisen"] .product-group-title { color: var(--food); }
+
+.product-group-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .product {
@@ -621,7 +649,7 @@ button {
 }
 
 @media (max-width: 1100px) {
-  .products {
+  .product-group-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
@@ -645,13 +673,13 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .products {
+  .product-group-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
-  .products {
+  .product-group-grid {
     grid-template-columns: 1fr;
   }
 
