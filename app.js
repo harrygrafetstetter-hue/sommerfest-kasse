@@ -7,8 +7,7 @@ const ARTICLES = [
   { id: "hefe", name: "Hefeweizen 0,5 l", group: "Biere", price: 4, pfand: true },
   { id: "hefe-af", name: "Hefeweizen Alkoholfrei 0,5 l", group: "Biere", price: 4, pfand: true },
 
-  { id: "wasser", name: "Mineralwasser Sprudel 0,5 l", group: "Soft Drinks", price: 3, pfand: false },
-  { id: "sinalco", name: "Sinalco versch. 0,5 l", group: "Soft Drinks", price: 3.5, pfand: false },
+  { id: "softdrink", name: "Softdrink 0,5 l", group: "Soft Drinks", price: 3.5, pfand: false },
 
   { id: "riesling", name: "Rieslingschorle 0,5 l", group: "Schorle / Cocktails", price: 6, pfand: true },
   { id: "weissherbst", name: "Weißherbstschorle 0,5 l", group: "Schorle / Cocktails", price: 6, pfand: true },
