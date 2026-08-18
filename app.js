@@ -2,15 +2,15 @@ const STORAGE_KEY = "sommerfest-kasse-v1";
 const PFAND = 2;
 
 const ARTICLES = [
-  { id: "helles", name: "Kleines Helles vom Fass 0,5 l", group: "Biere", price: 4, pfand: true },
-  { id: "radler", name: "Radler vom Fass 0,5 l", group: "Biere", price: 4, pfand: true },
-  { id: "hefe", name: "Hefeweizen 0,5 l", group: "Biere", price: 4, pfand: true },
-  { id: "hefe-af", name: "Hefeweizen Alkoholfrei 0,5 l", group: "Biere", price: 4, pfand: true },
+  { id: "helles", name: "Kleines Helles vom Fass", group: "Biere", price: 4, pfand: true },
+  { id: "radler", name: "Radler vom Fass", group: "Biere", price: 4, pfand: true },
+  { id: "hefe", name: "Hefeweizen", group: "Biere", price: 4, pfand: true },
+  { id: "hefe-af", name: "Hefeweizen Alkoholfrei", group: "Biere", price: 4, pfand: true },
 
-  { id: "softdrink", name: "Softdrink 0,5 l", group: "Soft Drinks", price: 3.5, pfand: false },
+  { id: "softdrink", name: "Softdrink", group: "Soft Drinks", price: 3.5, pfand: false },
 
-  { id: "riesling", name: "Rieslingschorle 0,5 l", group: "Schorle / Cocktails", price: 6, pfand: true },
-  { id: "weissherbst", name: "Weißherbstschorle 0,5 l", group: "Schorle / Cocktails", price: 6, pfand: true },
+  { id: "riesling", name: "Rieslingschorle", group: "Schorle / Cocktails", price: 6, pfand: true },
+  { id: "weissherbst", name: "Weißherbstschorle", group: "Schorle / Cocktails", price: 6, pfand: true },
   { id: "kukki", name: "Kukki Cocktail", group: "Schorle / Cocktails", price: 7, pfand: false },
   { id: "jaeger", name: "Jäger Shot", group: "Schorle / Cocktails", price: 3.5, pfand: false },
 
