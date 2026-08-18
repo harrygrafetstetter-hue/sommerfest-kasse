@@ -28,6 +28,19 @@ const GROUP_ORDER = [
   { id: "Speisen", label: "Speisen" },
 ];
 
+const SOLD_OVERVIEW = [
+  { label: "Biere", ids: ["helles", "radler", "hefe", "hefe-af"] },
+  { label: "Schorle", ids: ["riesling", "weissherbst"] },
+  { label: "Cocktail", ids: ["kukki"] },
+  { label: "Jäger Shot", ids: ["jaeger"] },
+  { label: "Softdrink", ids: ["softdrink"] },
+  { label: "Bratwurst", ids: ["bratwurst"] },
+  { label: "Steak Schwein", ids: ["steak"] },
+  { label: "Steak Pute", ids: ["putensteak"] },
+  { label: "Crepes Zimt & Zucker", ids: ["crepes-zimt"] },
+  { label: "Crepes Nutella", ids: ["crepes-nutella"] },
+];
+
 const state = {
   cart: [],
   sales: [],
@@ -43,6 +56,7 @@ const els = {
   sumTotal: document.getElementById("sum-total"),
   pay: document.getElementById("pay"),
   pfandReturn: document.getElementById("pfand-return"),
+  soldOverview: document.getElementById("sold-overview"),
   clock: document.getElementById("clock"),
   viewKasse: document.getElementById("view-kasse"),
   viewAuswertung: document.getElementById("view-auswertung"),
@@ -342,9 +356,33 @@ function completeSale() {
   state.cart = [];
   save();
   renderCart();
+  renderSoldOverview();
   closePayModal();
   renderAuswertung();
   showToast(`Verkauf gespeichert · ${money(sale.totals.total)}`);
+}
+
+function countSoldByArticle() {
+  const counts = Object.create(null);
+  for (const sale of state.sales) {
+    for (const item of sale.items) {
+      if (item.type !== "article" || !item.articleId) continue;
+      counts[item.articleId] = (counts[item.articleId] || 0) + item.qty;
+    }
+  }
+  return counts;
+}
+
+function renderSoldOverview() {
+  const counts = countSoldByArticle();
+  els.soldOverview.innerHTML = SOLD_OVERVIEW.map(({ label, ids }) => {
+    const qty = ids.reduce((sum, id) => sum + (counts[id] || 0), 0);
+    return `
+      <div class="sold-item">
+        <span class="sold-label">${label}</span>
+        <strong class="sold-qty">${qty}</strong>
+      </div>`;
+  }).join("");
 }
 
 function aggregateStats() {
@@ -512,6 +550,7 @@ async function importJson(file) {
   if (!Array.isArray(data.sales)) throw new Error("Ungültiges Backup");
   state.sales = data.sales;
   save();
+  renderSoldOverview();
   renderAuswertung();
   showToast("Backup geladen");
 }
@@ -521,6 +560,7 @@ function resetDay() {
   if (!ok) return;
   state.sales = [];
   save();
+  renderSoldOverview();
   renderAuswertung();
   showToast("Tag zurückgesetzt");
 }
@@ -598,6 +638,7 @@ function init() {
   load();
   renderProducts();
   renderCart();
+  renderSoldOverview();
   renderAuswertung();
   bindEvents();
   updateClock();
