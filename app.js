@@ -7,12 +7,9 @@ const ARTICLES = [
   { id: "hefe", name: "Hefeweizen 0,5 l", group: "Biere", price: 4, pfand: true },
   { id: "hefe-af", name: "Hefeweizen Alkoholfrei 0,5 l", group: "Biere", price: 4, pfand: true },
 
-  { id: "wasser", name: "Mineralwasser Sprudel 0,5 l", group: "Soft Drinks", price: 2.5, pfand: true },
+  { id: "wasser", name: "Mineralwasser Sprudel 0,5 l", group: "Soft Drinks", price: 3, pfand: true },
   { id: "limo", name: "Zitronenlimo 0,5 l", group: "Soft Drinks", price: 3, pfand: true },
-  { id: "sinalco-cola", name: "Sinalco Cola 0,5 l", group: "Soft Drinks", price: 3, pfand: false },
-  { id: "sinalco-mix", name: "Sinalco ColaMix 0,5 l", group: "Soft Drinks", price: 3, pfand: false },
-  { id: "sinalco-orange", name: "Sinalco Orange 0,5 l", group: "Soft Drinks", price: 3, pfand: false },
-  { id: "sinalco-zero", name: "Sinalco ColaZero 0,5 l", group: "Soft Drinks", price: 3, pfand: false },
+  { id: "sinalco", name: "Sinalco versch. 0,5 l", group: "Soft Drinks", price: 3.5, pfand: false },
 
   { id: "riesling", name: "Rieslingschorle 0,5 l", group: "Schorle / Cocktails", price: 6, pfand: true },
   { id: "weissherbst", name: "Weißherbstschorle 0,5 l", group: "Schorle / Cocktails", price: 6, pfand: true },
