@@ -12,6 +12,7 @@ const ARTICLES = [
   { id: "riesling", name: "Rieslingschorle 0,5 l", group: "Schorle / Cocktails", price: 6, pfand: true },
   { id: "weissherbst", name: "Weißherbstschorle 0,5 l", group: "Schorle / Cocktails", price: 6, pfand: true },
   { id: "kukki", name: "Kukki Cocktail", group: "Schorle / Cocktails", price: 7, pfand: false },
+  { id: "jaeger", name: "Jäger Shot", group: "Schorle / Cocktails", price: 3.5, pfand: false },
 
   { id: "bratwurst", name: "Bratwurst im Brötchen", group: "Speisen", price: 5, pfand: false },
   { id: "steak", name: "Steak im Brötchen", group: "Speisen", price: 6, pfand: false },
