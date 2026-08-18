@@ -17,8 +17,8 @@ const ARTICLES = [
   { id: "bratwurst", name: "Bratwurst", group: "Speisen", price: 4.5, pfand: false },
   { id: "steak", name: "Steak Schwein", group: "Speisen", price: 6, pfand: false },
   { id: "putensteak", name: "Steak Pute", group: "Speisen", price: 6, pfand: false },
-  { id: "crepes-zimt", name: "Crepes mit\nZimt und Zucker", group: "Speisen", price: 3.5, pfand: false },
-  { id: "crepes-nutella", name: "Crepes mit Nutella", group: "Speisen", price: 4.5, pfand: false },
+  { id: "crepes-zimt", name: "Crêpe Zimt/Zucker", group: "Speisen", price: 3.5, pfand: false },
+  { id: "crepes-nutella", name: "Crêpe Nutella", group: "Speisen", price: 4.5, pfand: false },
 ];
 
 const GROUP_ORDER = [
@@ -37,8 +37,8 @@ const SOLD_OVERVIEW = [
   { label: "Bratwurst", ids: ["bratwurst"], tone: "bratwurst" },
   { label: "Steak Schwein", ids: ["steak"], tone: "steak" },
   { label: "Steak Pute", ids: ["putensteak"], tone: "steak" },
-  { label: "Crepes Zimt & Zucker", ids: ["crepes-zimt"], tone: "crepes" },
-  { label: "Crepes Nutella", ids: ["crepes-nutella"], tone: "crepes" },
+  { label: "Crêpe Zimt/Zucker", ids: ["crepes-zimt"], tone: "crepes" },
+  { label: "Crêpe Nutella", ids: ["crepes-nutella"], tone: "crepes" },
 ];
 
 const state = {
