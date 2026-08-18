@@ -9,7 +9,7 @@
   --accent: #e8a317;
   --accent-ink: #3a2a05;
   --beer: #2f5f9a;
-  --soft: #2f7d8a;
+  --soft: #2f8a4e;
   --schorle: #8b3d5c;
   --food: #b85a2a;
   --danger: #b42318;
@@ -246,7 +246,7 @@ button {
 }
 
 .product[data-group="Biere"] { background: linear-gradient(145deg, #3d7ec4, #1f4f8a); }
-.product[data-group="Soft Drinks"] { background: linear-gradient(145deg, #3a97a4, #1f6570); }
+.product[data-group="Soft Drinks"] { background: linear-gradient(145deg, #3f9a5f, #1f6b3a); }
 .product[data-id="softdrink"] {
   background: linear-gradient(145deg, #3f9a5f, #1f6b3a);
   color: #fff;
