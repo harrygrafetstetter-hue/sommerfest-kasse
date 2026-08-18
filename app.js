@@ -57,7 +57,6 @@ const els = {
   sumTotal: document.getElementById("sum-total"),
   pay: document.getElementById("pay"),
   pfandReturn: document.getElementById("pfand-return"),
-  soldOverview: document.getElementById("sold-overview"),
   saleOverview: document.getElementById("sale-overview"),
   clock: document.getElementById("clock"),
   viewKasse: document.getElementById("view-kasse"),
@@ -407,33 +406,9 @@ function completeSale() {
   state.cart = [];
   save();
   renderCart();
-  renderSoldOverview();
   closePayModal();
   renderAuswertung();
   showToast(`Verkauf gespeichert · ${money(sale.totals.total)}`);
-}
-
-function countSoldByArticle() {
-  const counts = Object.create(null);
-  for (const sale of state.sales) {
-    for (const item of sale.items) {
-      if (item.type !== "article" || !item.articleId) continue;
-      counts[item.articleId] = (counts[item.articleId] || 0) + item.qty;
-    }
-  }
-  return counts;
-}
-
-function renderSoldOverview() {
-  const counts = countSoldByArticle();
-  els.soldOverview.innerHTML = SOLD_OVERVIEW.map(({ label, ids }) => {
-    const qty = ids.reduce((sum, id) => sum + (counts[id] || 0), 0);
-    return `
-      <div class="sold-item">
-        <span class="sold-label">${label}</span>
-        <strong class="sold-qty">${qty}</strong>
-      </div>`;
-  }).join("");
 }
 
 function aggregateStats() {
@@ -615,7 +590,6 @@ async function importJson(file) {
   if (!Array.isArray(data.sales)) throw new Error("Ungültiges Backup");
   state.sales = data.sales;
   save();
-  renderSoldOverview();
   renderAuswertung();
   showToast("Backup geladen");
 }
@@ -625,7 +599,6 @@ function resetDay() {
   if (!ok) return;
   state.sales = [];
   save();
-  renderSoldOverview();
   renderAuswertung();
   showToast("Tag zurückgesetzt");
 }
@@ -708,7 +681,6 @@ function init() {
   load();
   renderProducts();
   renderCart();
-  renderSoldOverview();
   renderAuswertung();
   bindEvents();
   updateClock();

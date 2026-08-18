@@ -307,46 +307,8 @@ button {
 
 .cart {
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto 1fr auto;
   padding: 16px;
-  gap: 0;
-}
-
-.sold-panel {
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--line);
-}
-
-.sold-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-}
-
-.sold-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border-radius: 12px;
-  background: var(--surface-2);
-  border: 1px solid var(--line);
-}
-
-.sold-label {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--muted);
-  line-height: 1.2;
-}
-
-.sold-qty {
-  font-variant-numeric: tabular-nums;
-  font-size: 1.05rem;
-  min-width: 1.5rem;
-  text-align: right;
 }
 
 .cart-head,
@@ -358,17 +320,11 @@ button {
 }
 
 .cart-head h2,
-.sold-panel h2,
 .stats-table-head h2,
 .sales-log h2 {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.35rem;
-}
-
-.sold-panel h2 {
-  margin-bottom: 8px;
-  font-size: 1.15rem;
 }
 
 .btn-text {
