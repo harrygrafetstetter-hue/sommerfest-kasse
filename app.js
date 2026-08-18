@@ -29,16 +29,16 @@ const GROUP_ORDER = [
 ];
 
 const SOLD_OVERVIEW = [
-  { label: "Biere", ids: ["helles", "radler", "hefe", "hefe-af"] },
-  { label: "Schorle", ids: ["riesling", "weissherbst"] },
-  { label: "Cocktail", ids: ["kukki"] },
-  { label: "Jäger Shot", ids: ["jaeger"] },
-  { label: "Softdrink", ids: ["softdrink"] },
-  { label: "Bratwurst", ids: ["bratwurst"] },
-  { label: "Steak Schwein", ids: ["steak"] },
-  { label: "Steak Pute", ids: ["putensteak"] },
-  { label: "Crepes Zimt & Zucker", ids: ["crepes-zimt"] },
-  { label: "Crepes Nutella", ids: ["crepes-nutella"] },
+  { label: "Biere", ids: ["helles", "radler", "hefe", "hefe-af"], tone: "beer" },
+  { label: "Schorle", ids: ["riesling", "weissherbst"], tone: "schorle" },
+  { label: "Cocktail", ids: ["kukki"], tone: "cocktail" },
+  { label: "Jäger Shot", ids: ["jaeger"], tone: "jaeger" },
+  { label: "Softdrink", ids: ["softdrink"], tone: "softdrink" },
+  { label: "Bratwurst", ids: ["bratwurst"], tone: "bratwurst" },
+  { label: "Steak Schwein", ids: ["steak"], tone: "steak" },
+  { label: "Steak Pute", ids: ["putensteak"], tone: "steak" },
+  { label: "Crepes Zimt & Zucker", ids: ["crepes-zimt"], tone: "crepes" },
+  { label: "Crepes Nutella", ids: ["crepes-nutella"], tone: "crepes" },
 ];
 
 const state = {
@@ -58,6 +58,7 @@ const els = {
   pay: document.getElementById("pay"),
   pfandReturn: document.getElementById("pfand-return"),
   soldOverview: document.getElementById("sold-overview"),
+  saleOverview: document.getElementById("sale-overview"),
   clock: document.getElementById("clock"),
   viewKasse: document.getElementById("view-kasse"),
   viewAuswertung: document.getElementById("view-auswertung"),
@@ -281,6 +282,38 @@ function renderCart() {
     .join("");
 }
 
+function countCartByArticle() {
+  const counts = Object.create(null);
+  for (const line of state.cart) {
+    if (line.type !== "article" || !line.articleId) continue;
+    counts[line.articleId] = (counts[line.articleId] || 0) + line.qty;
+  }
+  return counts;
+}
+
+function renderSaleOverview() {
+  const counts = countCartByArticle();
+  const rows = SOLD_OVERVIEW.map(({ label, ids, tone }) => {
+    const qty = ids.reduce((sum, id) => sum + (counts[id] || 0), 0);
+    return { label, qty, tone };
+  }).filter((row) => row.qty > 0);
+
+  if (!rows.length) {
+    els.saleOverview.innerHTML = `<p class="sale-overview-empty">Keine Artikelpositionen</p>`;
+    return;
+  }
+
+  els.saleOverview.innerHTML = rows
+    .map(
+      (row) => `
+      <div class="sale-overview-item tone-${row.tone}">
+        <span class="sale-overview-label">${row.label}</span>
+        <strong class="sale-overview-qty">${row.qty}</strong>
+      </div>`
+    )
+    .join("");
+}
+
 function setPaymentMethod(method) {
   state.paymentMethod = method === "karte" ? "karte" : "bar";
   document.querySelectorAll(".pay-method").forEach((btn) => {
@@ -296,6 +329,7 @@ function setPaymentMethod(method) {
 function openPayModal() {
   const { total } = cartTotals();
   els.payAmount.textContent = money(total);
+  renderSaleOverview();
   setPaymentMethod("bar");
   els.tenderInput.value = "";
   els.changeAmount.textContent = "—";

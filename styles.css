@@ -670,6 +670,66 @@ button {
   font-variant-numeric: tabular-nums;
 }
 
+.sale-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+
+.sale-overview-empty {
+  margin: 0;
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.sale-overview-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.sale-overview-label {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.sale-overview-qty {
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.sale-overview-item.tone-beer {
+  background: linear-gradient(145deg, #3d7ec4, #1f4f8a);
+}
+
+.sale-overview-item.tone-schorle,
+.sale-overview-item.tone-steak {
+  background: linear-gradient(145deg, #f0d24a, #d4a917);
+  color: #2a2408;
+}
+
+.sale-overview-item.tone-cocktail,
+.sale-overview-item.tone-bratwurst {
+  background: linear-gradient(145deg, #d64545, #9e1f1f);
+}
+
+.sale-overview-item.tone-softdrink,
+.sale-overview-item.tone-crepes {
+  background: linear-gradient(145deg, #3f9a5f, #1f6b3a);
+}
+
+.sale-overview-item.tone-jaeger {
+  background: linear-gradient(145deg, #f4efe3, #e4d8c2);
+  color: #2a2418;
+}
+
 .pay-methods {
   display: grid;
   grid-template-columns: 1fr 1fr;
