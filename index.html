@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Sommerfest Kasse" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <title>Sommerfest Kasse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=22" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <div>
+          <h1>Sommerfest</h1>
+          <p class="brand-sub">Kasse</p>
+        </div>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button type="button" class="tab is-active" data-view="kasse" role="tab" aria-selected="true">Kasse</button>
+        <button type="button" class="tab" data-view="auswertung" role="tab" aria-selected="false">Auswertung</button>
+      </nav>
+      <div class="clock" id="clock"></div>
+    </header>
+
+    <main id="view-kasse" class="view view-kasse is-visible">
+      <section class="catalog" aria-label="Artikel">
+        <div class="products" id="products"></div>
+        <button type="button" class="pfand-return" id="pfand-return">
+          <span class="pfand-return-label">Pfandrücknahme</span>
+          <span class="pfand-return-price">−2,00 €</span>
+        </button>
+      </section>
+
+      <aside class="cart" aria-label="Warenkorb">
+        <div class="cart-head">
+          <h2>Bon</h2>
+          <button type="button" class="btn-text" id="clear-cart" disabled>Leeren</button>
+        </div>
+        <ul class="cart-list" id="cart-list"></ul>
+        <div class="cart-empty" id="cart-empty">Noch keine Artikel</div>
+        <div class="cart-footer">
+          <div class="totals">
+            <div class="total-row">
+              <span>Artikel</span>
+              <strong id="sum-articles">0,00 €</strong>
+            </div>
+            <div class="total-row">
+              <span>Pfand</span>
+              <strong id="sum-pfand">0,00 €</strong>
+            </div>
+            <div class="total-row total-grand">
+              <span>Summe</span>
+              <strong id="sum-total">0,00 €</strong>
+            </div>
+          </div>
+          <button type="button" class="btn-pay" id="pay" disabled>Kassieren</button>
+        </div>
+      </aside>
+    </main>
+
+    <main id="view-auswertung" class="view view-auswertung" hidden>
+      <section class="stats-panel">
+        <div class="stats-cards" id="stats-cards"></div>
+        <div class="stats-table-wrap">
+          <div class="stats-table-head">
+            <h2>Verkaufte Artikel</h2>
+            <div class="stats-actions">
+              <button type="button" class="btn-secondary" id="export-csv">CSV exportieren</button>
+              <button type="button" class="btn-secondary" id="export-json">Backup (JSON)</button>
+              <label class="btn-secondary file-btn">
+                Backup laden
+                <input type="file" id="import-json" accept="application/json,.json" hidden />
+              </label>
+              <button type="button" class="btn-danger" id="reset-day">Tag zurücksetzen</button>
+            </div>
+          </div>
+          <table class="stats-table">
+            <thead>
+              <tr>
+                <th>Artikel</th>
+                <th>Gruppe</th>
+                <th class="num">Stück</th>
+                <th class="num">Umsatz</th>
+              </tr>
+            </thead>
+            <tbody id="stats-body"></tbody>
+          </table>
+        </div>
+        <div class="sales-log">
+          <h2>Letzte Verkäufe</h2>
+          <ul id="sales-log"></ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="pay-modal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pay-title">
+      <h2 id="pay-title">Kassieren</h2>
+      <p class="modal-amount">Zu zahlen: <strong id="pay-amount">0,00 €</strong></p>
+      <div class="tender-grid" id="tender-grid"></div>
+      <label class="tender-custom">
+        Gegeben
+        <input type="text" inputmode="decimal" id="tender-input" placeholder="0,00" />
+      </label>
+      <p class="change-line">Rückgeld: <strong id="change-amount">—</strong></p>
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" data-close-modal>Abbrechen</button>
+        <button type="button" class="btn-pay" id="confirm-pay">Bezahlt</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="app.js?v=22"></script>
+</body>
+</html>
