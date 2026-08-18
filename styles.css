@@ -648,6 +648,8 @@ button {
 .modal-card {
   position: relative;
   width: min(480px, 100%);
+  max-height: min(90dvh, 760px);
+  overflow: auto;
   background: var(--surface);
   border-radius: 24px;
   padding: 22px;
