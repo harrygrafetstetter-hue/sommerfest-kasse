@@ -44,6 +44,7 @@ const SOLD_OVERVIEW = [
 const state = {
   cart: [],
   sales: [],
+  paymentMethod: "bar",
 };
 
 const els = {
@@ -65,6 +66,7 @@ const els = {
   salesLog: document.getElementById("sales-log"),
   payModal: document.getElementById("pay-modal"),
   payAmount: document.getElementById("pay-amount"),
+  cashFields: document.getElementById("cash-fields"),
   tenderGrid: document.getElementById("tender-grid"),
   tenderInput: document.getElementById("tender-input"),
   changeAmount: document.getElementById("change-amount"),
@@ -279,9 +281,22 @@ function renderCart() {
     .join("");
 }
 
+function setPaymentMethod(method) {
+  state.paymentMethod = method === "karte" ? "karte" : "bar";
+  document.querySelectorAll(".pay-method").forEach((btn) => {
+    btn.classList.toggle("is-active", btn.dataset.method === state.paymentMethod);
+  });
+  els.cashFields.classList.toggle("is-hidden", state.paymentMethod === "karte");
+  if (state.paymentMethod === "karte") {
+    els.tenderInput.value = "";
+    els.changeAmount.textContent = "—";
+  }
+}
+
 function openPayModal() {
   const { total } = cartTotals();
   els.payAmount.textContent = money(total);
+  setPaymentMethod("bar");
   els.tenderInput.value = "";
   els.changeAmount.textContent = "—";
 
@@ -301,7 +316,7 @@ function openPayModal() {
     .join("");
 
   els.payModal.hidden = false;
-  els.tenderInput.focus();
+  if (state.paymentMethod === "bar") els.tenderInput.focus();
 }
 
 function closePayModal() {
@@ -328,10 +343,11 @@ function completeSale() {
   const totals = cartTotals();
   if (!state.cart.length) return;
 
-  const given = parseEuro(els.tenderInput.value);
+  const given = state.paymentMethod === "bar" ? parseEuro(els.tenderInput.value) : totals.total;
   const sale = {
     id: crypto.randomUUID(),
     createdAt: new Date().toISOString(),
+    paymentMethod: state.paymentMethod,
     items: state.cart.map((line) => ({
       type: line.type,
       articleId: line.articleId || null,
@@ -347,9 +363,10 @@ function completeSale() {
       total: Number(totals.total.toFixed(2)),
     },
     tender: Number.isFinite(given) ? Number(given.toFixed(2)) : Number(totals.total.toFixed(2)),
-    change: Number.isFinite(given)
-      ? Number((given - totals.total).toFixed(2))
-      : 0,
+    change:
+      state.paymentMethod === "bar" && Number.isFinite(given)
+        ? Number((given - totals.total).toFixed(2))
+        : 0,
   };
 
   state.sales.unshift(sale);
@@ -473,13 +490,14 @@ function renderAuswertung() {
         second: "2-digit",
       }).format(new Date(sale.createdAt));
       const count = sale.items.reduce((sum, item) => sum + item.qty, 0);
+      const method = sale.paymentMethod === "karte" ? "Karte" : "Bar";
       return `
         <li>
           <div>
             <strong>${money(sale.totals.total)}</strong>
             <div class="sale-meta">${time} · ${count} Position${count === 1 ? "" : "en"}</div>
           </div>
-          <div class="sale-meta">Bar</div>
+          <div class="sale-meta">${method}</div>
         </li>`;
     })
     .join("") || `<li><div class="sale-meta">Noch keine Verkäufe</div></li>`;
@@ -500,7 +518,7 @@ function exportCsv() {
     ["Pfand netto", stats.pfandNet.toFixed(2).replace(".", ",")].join(";"),
     ["Kassenstand", stats.cashTotal.toFixed(2).replace(".", ",")].join(";"),
     [],
-    ["Verkauf-ID", "Zeit", "Position", "Typ", "Stück", "Einzelpreis", "Summe"].join(";"),
+    ["Verkauf-ID", "Zeit", "Zahlungsart", "Position", "Typ", "Stück", "Einzelpreis", "Summe"].join(";"),
   ];
 
   for (const sale of state.sales) {
@@ -509,6 +527,7 @@ function exportCsv() {
         [
           sale.id,
           sale.createdAt,
+          sale.paymentMethod === "karte" ? "Karte" : "Bar",
           item.name,
           item.type,
           item.qty,
@@ -609,6 +628,11 @@ function bindEvents() {
 
   els.payModal.addEventListener("click", (event) => {
     if (event.target.matches("[data-close-modal]")) closePayModal();
+    const methodBtn = event.target.closest("[data-method]");
+    if (methodBtn) {
+      setPaymentMethod(methodBtn.dataset.method);
+      return;
+    }
     const tender = event.target.closest("[data-tender]");
     if (tender) {
       els.tenderInput.value = Number(tender.dataset.tender).toFixed(2).replace(".", ",");

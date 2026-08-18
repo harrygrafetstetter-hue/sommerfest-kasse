@@ -3,8 +3,8 @@
   "short_name": "Kasse",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#1a3a2f",
-  "theme_color": "#1a3a2f",
+  "background_color": "#0f3d55",
+  "theme_color": "#33a7d4",
   "lang": "de",
   "icons": []
 }

@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=24" />
+  <link rel="stylesheet" href="styles.css?v=25" />
 </head>
 <body>
   <div class="app">
@@ -111,12 +111,18 @@
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="pay-title">
       <h2 id="pay-title">Kassieren</h2>
       <p class="modal-amount">Zu zahlen: <strong id="pay-amount">0,00 €</strong></p>
-      <div class="tender-grid" id="tender-grid"></div>
-      <label class="tender-custom">
-        Gegeben
-        <input type="text" inputmode="decimal" id="tender-input" placeholder="0,00" />
-      </label>
-      <p class="change-line">Rückgeld: <strong id="change-amount">—</strong></p>
+      <div class="pay-methods" role="group" aria-label="Zahlungsart">
+        <button type="button" class="pay-method is-active" data-method="bar">Bar</button>
+        <button type="button" class="pay-method" data-method="karte">Karte</button>
+      </div>
+      <div class="cash-fields" id="cash-fields">
+        <div class="tender-grid" id="tender-grid"></div>
+        <label class="tender-custom">
+          Gegeben
+          <input type="text" inputmode="decimal" id="tender-input" placeholder="0,00" />
+        </label>
+        <p class="change-line">Rückgeld: <strong id="change-amount">—</strong></p>
+      </div>
       <div class="modal-actions">
         <button type="button" class="btn-secondary" data-close-modal>Abbrechen</button>
         <button type="button" class="btn-pay" id="confirm-pay">Bezahlt</button>
@@ -126,6 +132,6 @@
 
   <div class="toast" id="toast" hidden></div>
 
-  <script src="app.js?v=24"></script>
+  <script src="app.js?v=25"></script>
 </body>
 </html>
