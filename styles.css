@@ -537,7 +537,7 @@ button {
 
 .stats-cards {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -546,6 +546,11 @@ button {
   border-radius: 18px;
   background: var(--surface-2);
   border: 1px solid var(--line);
+}
+
+.stat-card-total {
+  background: linear-gradient(145deg, rgba(51, 167, 212, 0.16), rgba(51, 167, 212, 0.06));
+  border-color: rgba(51, 167, 212, 0.35);
 }
 
 .stat-card span {

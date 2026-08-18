@@ -442,8 +442,14 @@ function aggregateStats() {
   let pfandOut = 0;
   let pfandBack = 0;
   let saleCount = state.sales.length;
+  let totalBar = 0;
+  let totalKarte = 0;
 
   for (const sale of state.sales) {
+    const saleTotal = Number(sale.totals?.total || 0);
+    if (sale.paymentMethod === "karte") totalKarte += saleTotal;
+    else totalBar += saleTotal;
+
     for (const item of sale.items) {
       if (item.type === "article") {
         revenueArticles += item.lineTotal;
@@ -467,7 +473,7 @@ function aggregateStats() {
 
   const rows = [...articleMap.values()].sort((a, b) => b.qty - a.qty);
   const pfandNet = pfandOut - pfandBack;
-  const cashTotal = revenueArticles + pfandNet;
+  const cashTotal = totalBar + totalKarte;
 
   return {
     saleCount,
@@ -475,7 +481,9 @@ function aggregateStats() {
     pfandOut,
     pfandBack,
     pfandNet,
-    cashTotal,
+    totalBar: Number(totalBar.toFixed(2)),
+    totalKarte: Number(totalKarte.toFixed(2)),
+    cashTotal: Number(cashTotal.toFixed(2)),
     rows,
   };
 }
@@ -487,7 +495,9 @@ function renderAuswertung() {
     <div class="stat-card"><span>Verkäufe</span><strong>${stats.saleCount}</strong></div>
     <div class="stat-card"><span>Artikelumsatz</span><strong>${money(stats.revenueArticles)}</strong></div>
     <div class="stat-card"><span>Pfand netto</span><strong>${money(stats.pfandNet)}</strong></div>
-    <div class="stat-card"><span>Kassenstand</span><strong>${money(stats.cashTotal)}</strong></div>
+    <div class="stat-card"><span>Kassenstand Bar</span><strong>${money(stats.totalBar)}</strong></div>
+    <div class="stat-card"><span>Kassenstand Karte</span><strong>${money(stats.totalKarte)}</strong></div>
+    <div class="stat-card stat-card-total"><span>Gesamtsumme</span><strong>${money(stats.cashTotal)}</strong></div>
   `;
 
   els.statsBody.innerHTML =
@@ -550,7 +560,9 @@ function exportCsv() {
     ["Verkäufe", stats.saleCount].join(";"),
     ["Artikelumsatz", stats.revenueArticles.toFixed(2).replace(".", ",")].join(";"),
     ["Pfand netto", stats.pfandNet.toFixed(2).replace(".", ",")].join(";"),
-    ["Kassenstand", stats.cashTotal.toFixed(2).replace(".", ",")].join(";"),
+    ["Kassenstand Bar", stats.totalBar.toFixed(2).replace(".", ",")].join(";"),
+    ["Kassenstand Karte", stats.totalKarte.toFixed(2).replace(".", ",")].join(";"),
+    ["Gesamtsumme", stats.cashTotal.toFixed(2).replace(".", ",")].join(";"),
     [],
     ["Verkauf-ID", "Zeit", "Zahlungsart", "Position", "Typ", "Stück", "Einzelpreis", "Summe"].join(";"),
   ];
