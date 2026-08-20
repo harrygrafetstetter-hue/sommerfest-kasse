@@ -269,6 +269,7 @@ button {
 
 .product[data-id="riesling"],
 .product[data-id="weissherbst"],
+.product[data-id="aperol"],
 .product[data-id="steak"],
 .product[data-id="putensteak"] {
   background: linear-gradient(145deg, #f0d24a, #d4a917);
@@ -294,6 +295,7 @@ button {
 
 .product[data-id="riesling"] .product-pfand,
 .product[data-id="weissherbst"] .product-pfand,
+.product[data-id="aperol"] .product-pfand,
 .product[data-id="jaeger"] .product-pfand {
   background: rgba(0, 0, 0, 0.12);
 }

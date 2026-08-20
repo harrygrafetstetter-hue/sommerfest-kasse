@@ -11,6 +11,7 @@ const ARTICLES = [
 
   { id: "riesling", name: "Rieslingschorle", group: "Schorle / Cocktails", price: 6, pfand: true },
   { id: "weissherbst", name: "Weißherbstschorle", group: "Schorle / Cocktails", price: 6, pfand: true },
+  { id: "aperol", name: "Aperol Spritz", group: "Schorle / Cocktails", price: 7, pfand: true },
   { id: "kukki", name: "Kukki Cocktail", group: "Schorle / Cocktails", price: 7, pfand: false },
   { id: "jaeger", name: "Jäger Shot", group: "Schorle / Cocktails", price: 3.5, pfand: false },
 
@@ -31,6 +32,7 @@ const GROUP_ORDER = [
 const SOLD_OVERVIEW = [
   { label: "Biere", ids: ["helles", "radler", "hefe", "hefe-af"], tone: "beer" },
   { label: "Schorle", ids: ["riesling", "weissherbst"], tone: "schorle" },
+  { label: "Aperol Spritz", ids: ["aperol"], tone: "schorle" },
   { label: "Cocktail", ids: ["kukki"], tone: "cocktail" },
   { label: "Jäger Shot", ids: ["jaeger"], tone: "jaeger" },
   { label: "Softdrink", ids: ["softdrink"], tone: "softdrink" },
