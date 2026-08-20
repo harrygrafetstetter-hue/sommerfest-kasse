@@ -269,7 +269,6 @@ button {
 
 .product[data-id="riesling"],
 .product[data-id="weissherbst"],
-.product[data-id="aperol"],
 .product[data-id="steak"],
 .product[data-id="putensteak"] {
   background: linear-gradient(145deg, #f0d24a, #d4a917);
@@ -277,6 +276,7 @@ button {
 }
 
 .product[data-id="kukki"],
+.product[data-id="aperol"],
 .product[data-id="bratwurst"] {
   background: linear-gradient(145deg, #d64545, #9e1f1f);
   color: #fff;
@@ -288,7 +288,8 @@ button {
   color: #fff;
 }
 
-.product[data-id="jaeger"] {
+.product[data-id="jaeger"],
+.product[data-id="berliner"] {
   background: linear-gradient(145deg, #f4efe3, #e4d8c2);
   color: #2a2418;
 }

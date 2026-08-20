@@ -14,6 +14,7 @@ const ARTICLES = [
   { id: "aperol", name: "Aperol Spritz", group: "Schorle / Cocktails", price: 7, pfand: true },
   { id: "kukki", name: "Kukki Cocktail", group: "Schorle / Cocktails", price: 7, pfand: false },
   { id: "jaeger", name: "Jäger Shot", group: "Schorle / Cocktails", price: 3.5, pfand: false },
+  { id: "berliner", name: "Berliner Luft", group: "Schorle / Cocktails", price: 3, pfand: false },
 
   { id: "bratwurst", name: "Bratwurst", group: "Speisen", price: 4.5, pfand: false },
   { id: "steak", name: "Steak Schwein", group: "Speisen", price: 6, pfand: false },
@@ -32,9 +33,10 @@ const GROUP_ORDER = [
 const SOLD_OVERVIEW = [
   { label: "Biere", ids: ["helles", "radler", "hefe", "hefe-af"], tone: "beer" },
   { label: "Schorle", ids: ["riesling", "weissherbst"], tone: "schorle" },
-  { label: "Aperol Spritz", ids: ["aperol"], tone: "schorle" },
+  { label: "Aperol Spritz", ids: ["aperol"], tone: "cocktail" },
   { label: "Cocktail", ids: ["kukki"], tone: "cocktail" },
   { label: "Jäger Shot", ids: ["jaeger"], tone: "jaeger" },
+  { label: "Berliner Luft", ids: ["berliner"], tone: "jaeger" },
   { label: "Softdrink", ids: ["softdrink"], tone: "softdrink" },
   { label: "Bratwurst", ids: ["bratwurst"], tone: "bratwurst" },
   { label: "Steak Schwein", ids: ["steak"], tone: "steak" },
