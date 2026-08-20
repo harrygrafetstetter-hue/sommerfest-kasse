@@ -23,8 +23,8 @@ const ARTICLES = [
 
 const GROUP_ORDER = [
   { id: "Biere", label: "Biere" },
-  { id: "Schorle / Cocktails", label: "Schorle & Cocktails" },
   { id: "Soft Drinks", label: "Softgetränke" },
+  { id: "Schorle / Cocktails", label: "Schorle & Cocktails" },
   { id: "Speisen", label: "Speisen" },
 ];
 
