@@ -13,7 +13,7 @@ const ARTICLES = [
   { id: "weissherbst", name: "Weißherbstschorle", group: "Schorle / Cocktails", price: 6, pfand: true },
   { id: "aperol", name: "Aperol Spritz", group: "Schorle / Cocktails", price: 7, pfand: true },
   { id: "kukki", name: "Kukki Cocktail", group: "Schorle / Cocktails", price: 7, pfand: false },
-  { id: "jaeger", name: "Jäger Shot", group: "Schorle / Cocktails", price: 3.5, pfand: false },
+  { id: "jaeger", name: "Jäger Shot", group: "Schorle / Cocktails", price: 3, pfand: false },
   { id: "berliner", name: "Berliner Luft", group: "Schorle / Cocktails", price: 3, pfand: false },
 
   { id: "bratwurst", name: "Bratwurst", group: "Speisen", price: 4.5, pfand: false },
