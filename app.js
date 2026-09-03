@@ -19,8 +19,8 @@ const ARTICLES = [
   { id: "bratwurst", name: "Bratwurst", group: "Speisen", price: 4.5, pfand: false },
   { id: "crepes-zimt", name: "Crêpe Zimt/Zucker", group: "Speisen", price: 3.5, pfand: false },
   { id: "steak", name: "Steak Schwein", group: "Speisen", price: 6, pfand: false },
-  { id: "crepes-nutella", name: "Crêpe Nutella", group: "Speisen", price: 4.5, pfand: false },
-  { id: "putensteak", name: "Steak Pute", group: "Speisen", price: 6, pfand: false },
+  { id: "crepes-nutella", name: "Crêpe Nutella ( / )", group: "Speisen", price: 4.5, pfand: false },
+  { id: "putensteak", name: "Steak Pute ( / )", group: "Speisen", price: 6, pfand: false },
 
   { id: "strohhut", name: "Strohhut", group: "Strohhut", price: 9, pfand: false },
 ];
@@ -47,9 +47,9 @@ const SOLD_OVERVIEW = [
   { label: "Softdrink", ids: ["softdrink"], tone: "softdrink" },
   { label: "Bratwurst", ids: ["bratwurst"], tone: "bratwurst" },
   { label: "Steak Schwein", ids: ["steak"], tone: "steak" },
-  { label: "Steak Pute", ids: ["putensteak"], tone: "steak" },
+  { label: "Steak Pute ( / )", ids: ["putensteak"], tone: "steak" },
   { label: "Crêpe Zimt/Zucker", ids: ["crepes-zimt"], tone: "crepes" },
-  { label: "Crêpe Nutella", ids: ["crepes-nutella"], tone: "crepes" },
+  { label: "Crêpe Nutella ( / )", ids: ["crepes-nutella"], tone: "crepes" },
   { label: "Strohhut", ids: ["strohhut"], tone: "strohhut" },
 ];
 
