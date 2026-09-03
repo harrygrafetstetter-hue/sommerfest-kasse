@@ -10,10 +10,10 @@ const ARTICLES = [
   { id: "softdrink", name: "Softdrink", group: "Soft Drinks", price: 3.5, pfand: false },
 
   { id: "riesling", name: "Rieslingschorle", group: "Schorle / Cocktails", price: 6, pfand: true },
-  { id: "weissherbst", name: "Weißherbstschorle", group: "Schorle / Cocktails", price: 6, pfand: true },
-  { id: "aperol", name: "Aperol Spritz", group: "Schorle / Cocktails", price: 7, pfand: true },
   { id: "kukki", name: "Kukki Cocktail", group: "Schorle / Cocktails", price: 7, pfand: false },
   { id: "jaeger", name: "Jäger Shot", group: "Schorle / Cocktails", price: 3, pfand: false },
+  { id: "weissherbst", name: "Weißherbstschorle", group: "Schorle / Cocktails", price: 6, pfand: true },
+  { id: "aperol", name: "Aperol Spritz", group: "Schorle / Cocktails", price: 7, pfand: false },
   { id: "berliner", name: "Berliner Luft", group: "Schorle / Cocktails", price: 3, pfand: false },
 
   { id: "bratwurst", name: "Bratwurst", group: "Speisen", price: 4.5, pfand: false },
@@ -28,8 +28,8 @@ const ARTICLES = [
 const GROUP_ROWS = [
   [{ id: "Biere", label: "Biere" }],
   [
-    { id: "Soft Drinks", label: "Softgetränke" },
     { id: "Schorle / Cocktails", label: "Schorle & Cocktails" },
+    { id: "Soft Drinks", label: "Softgetränke" },
   ],
   [
     { id: "Speisen", label: "Speisen" },
@@ -159,8 +159,8 @@ function renderProducts() {
     const layout =
       row.length === 1
         ? "full"
-        : row[0].id === "Soft Drinks"
-          ? "soft-schorle"
+        : row[0].id === "Schorle / Cocktails"
+          ? "schorle-soft"
           : "speisen-strohhut";
     return `
       <div class="product-row" data-layout="${layout}">
