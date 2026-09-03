@@ -17,17 +17,24 @@ const ARTICLES = [
   { id: "berliner", name: "Berliner Luft", group: "Schorle / Cocktails", price: 3, pfand: false },
 
   { id: "bratwurst", name: "Bratwurst", group: "Speisen", price: 4.5, pfand: false },
-  { id: "steak", name: "Steak Schwein", group: "Speisen", price: 6, pfand: false },
-  { id: "putensteak", name: "Steak Pute", group: "Speisen", price: 6, pfand: false },
   { id: "crepes-zimt", name: "Crêpe Zimt/Zucker", group: "Speisen", price: 3.5, pfand: false },
+  { id: "steak", name: "Steak Schwein", group: "Speisen", price: 6, pfand: false },
   { id: "crepes-nutella", name: "Crêpe Nutella", group: "Speisen", price: 4.5, pfand: false },
+  { id: "putensteak", name: "Steak Pute", group: "Speisen", price: 6, pfand: false },
+
+  { id: "strohhut", name: "Strohhut", group: "Strohhut", price: 9, pfand: false },
 ];
 
-const GROUP_ORDER = [
-  { id: "Biere", label: "Biere" },
-  { id: "Soft Drinks", label: "Softgetränke" },
-  { id: "Schorle / Cocktails", label: "Schorle & Cocktails" },
-  { id: "Speisen", label: "Speisen" },
+const GROUP_ROWS = [
+  [{ id: "Biere", label: "Biere" }],
+  [
+    { id: "Soft Drinks", label: "Softgetränke" },
+    { id: "Schorle / Cocktails", label: "Schorle & Cocktails" },
+  ],
+  [
+    { id: "Speisen", label: "Speisen" },
+    { id: "Strohhut", label: "Strohhut" },
+  ],
 ];
 
 const SOLD_OVERVIEW = [
@@ -43,6 +50,7 @@ const SOLD_OVERVIEW = [
   { label: "Steak Pute", ids: ["putensteak"], tone: "steak" },
   { label: "Crêpe Zimt/Zucker", ids: ["crepes-zimt"], tone: "crepes" },
   { label: "Crêpe Nutella", ids: ["crepes-nutella"], tone: "crepes" },
+  { label: "Strohhut", ids: ["strohhut"], tone: "strohhut" },
 ];
 
 const state = {
@@ -124,27 +132,40 @@ function updateClock() {
   }).format(new Date());
 }
 
-function renderProducts() {
-  els.products.innerHTML = GROUP_ORDER.map(({ id, label }) => {
-    const items = ARTICLES.filter((article) => article.group === id);
-    const buttons = items
-      .map(
-        (article) => `
-        <button type="button" class="product" data-id="${article.id}" data-group="${article.group}">
-          <span class="product-name">${article.name.replace(/\n/g, "<br>")}</span>
-          <span class="product-meta">
-            <span class="product-price">${money(article.price)}</span>
-            ${article.pfand ? `<span class="product-pfand">+ ${money(PFAND)} Pfand</span>` : ""}
-          </span>
-        </button>`
-      )
-      .join("");
+function renderGroupSection({ id, label }) {
+  const items = ARTICLES.filter((article) => article.group === id);
+  const buttons = items
+    .map(
+      (article) => `
+      <button type="button" class="product" data-id="${article.id}" data-group="${article.group}">
+        <span class="product-name">${article.name.replace(/\n/g, "<br>")}</span>
+        <span class="product-meta">
+          <span class="product-price">${money(article.price)}</span>
+          ${article.pfand ? `<span class="product-pfand">+ ${money(PFAND)} Pfand</span>` : ""}
+        </span>
+      </button>`
+    )
+    .join("");
 
+  return `
+    <section class="product-group" data-group="${id}">
+      <h2 class="product-group-title">${label}</h2>
+      <div class="product-group-grid">${buttons}</div>
+    </section>`;
+}
+
+function renderProducts() {
+  els.products.innerHTML = GROUP_ROWS.map((row) => {
+    const layout =
+      row.length === 1
+        ? "full"
+        : row[0].id === "Soft Drinks"
+          ? "soft-schorle"
+          : "speisen-strohhut";
     return `
-      <section class="product-group" data-group="${id}">
-        <h2 class="product-group-title">${label}</h2>
-        <div class="product-group-grid">${buttons}</div>
-      </section>`;
+      <div class="product-row" data-layout="${layout}">
+        ${row.map(renderGroupSection).join("")}
+      </div>`;
   }).join("");
 }
 

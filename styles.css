@@ -159,12 +159,29 @@ button {
 }
 
 .products {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
   align-content: start;
   overflow: auto;
   padding-right: 2px;
+}
+
+.product-row {
+  display: grid;
+  gap: 16px;
+}
+
+.product-row[data-layout="full"] {
+  grid-template-columns: 1fr;
+}
+
+.product-row[data-layout="soft-schorle"] {
+  grid-template-columns: 1fr 3fr;
+}
+
+.product-row[data-layout="speisen-strohhut"] {
+  grid-template-columns: 2fr 1fr;
 }
 
 .product-group {
@@ -174,11 +191,6 @@ button {
   border-radius: 20px;
   background: rgba(20, 36, 29, 0.04);
   border: 1px solid var(--line);
-}
-
-.product-group[data-group="Biere"],
-.product-group[data-group="Speisen"] {
-  grid-column: 1 / -1;
 }
 
 .product-group-title {
@@ -193,6 +205,7 @@ button {
 .product-group[data-group="Soft Drinks"] .product-group-title { color: var(--soft); }
 .product-group[data-group="Schorle / Cocktails"] .product-group-title { color: var(--schorle); }
 .product-group[data-group="Speisen"] .product-group-title { color: var(--food); }
+.product-group[data-group="Strohhut"] .product-group-title { color: #9a6b2f; }
 
 .product-group-grid {
   display: grid;
@@ -200,7 +213,8 @@ button {
   gap: 10px;
 }
 
-.product-group[data-group="Soft Drinks"] .product-group-grid {
+.product-group[data-group="Soft Drinks"] .product-group-grid,
+.product-group[data-group="Strohhut"] .product-group-grid {
   grid-template-columns: 1fr;
 }
 
@@ -209,7 +223,7 @@ button {
 }
 
 .product-group[data-group="Speisen"] .product-group-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .product {
@@ -266,6 +280,7 @@ button {
 }
 .product[data-group="Schorle / Cocktails"] { background: linear-gradient(145deg, #a44d6f, #6e2d4a); }
 .product[data-group="Speisen"] { background: linear-gradient(145deg, #d06a36, #94431c); }
+.product[data-group="Strohhut"] { background: linear-gradient(145deg, #d2a45a, #9a6b2f); }
 
 .product[data-id="riesling"],
 .product[data-id="weissherbst"],
@@ -292,6 +307,11 @@ button {
 .product[data-id="berliner"] {
   background: linear-gradient(145deg, #f4efe3, #e4d8c2);
   color: #2a2418;
+}
+
+.product[data-id="strohhut"] {
+  background: linear-gradient(145deg, #e2bf74, #b8893d);
+  color: #2a1f0a;
 }
 
 .product[data-id="riesling"] .product-pfand,
@@ -709,6 +729,11 @@ button {
   color: #2a2418;
 }
 
+.sale-overview-item.tone-strohhut {
+  background: linear-gradient(145deg, #e2bf74, #b8893d);
+  color: #2a1f0a;
+}
+
 .pay-methods {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -795,21 +820,29 @@ button {
 }
 
 @media (max-width: 1100px) {
-  .products {
+  .product-row[data-layout="soft-schorle"] {
     grid-template-columns: 1fr 2fr;
+  }
+
+  .product-row[data-layout="speisen-strohhut"] {
+    grid-template-columns: 2fr 1fr;
   }
 
   .product-group-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .product-group[data-group="Soft Drinks"] .product-group-grid {
+  .product-group[data-group="Soft Drinks"] .product-group-grid,
+  .product-group[data-group="Strohhut"] .product-group-grid {
     grid-template-columns: 1fr;
   }
 
-  .product-group[data-group="Schorle / Cocktails"] .product-group-grid,
-  .product-group[data-group="Speisen"] .product-group-grid {
+  .product-group[data-group="Schorle / Cocktails"] .product-group-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .product-group[data-group="Speisen"] .product-group-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -832,23 +865,22 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .products {
+  .product-row[data-layout="soft-schorle"],
+  .product-row[data-layout="speisen-strohhut"] {
     grid-template-columns: 1fr;
-  }
-
-  .product-group[data-group="Biere"],
-  .product-group[data-group="Soft Drinks"],
-  .product-group[data-group="Schorle / Cocktails"],
-  .product-group[data-group="Speisen"] {
-    grid-column: auto;
   }
 
   .product-group-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .product-group[data-group="Soft Drinks"] .product-group-grid {
+  .product-group[data-group="Soft Drinks"] .product-group-grid,
+  .product-group[data-group="Strohhut"] .product-group-grid {
     grid-template-columns: 1fr;
+  }
+
+  .product-group[data-group="Speisen"] .product-group-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
